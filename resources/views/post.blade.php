@@ -4,6 +4,7 @@
     <title>Single Post</title>
 </head>
 <body>
-    <!-- عرض المنشور المحدد هنا -->
+fdffds
 </body>
+@include('footer') 
 </html>

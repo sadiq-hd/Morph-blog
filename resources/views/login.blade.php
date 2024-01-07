@@ -19,8 +19,7 @@
                                 <button type="submit" class="btn btn-secondary btn-block">Login</button>
                             </div>
                             <div class="form-group text-center">
-                                <a class="nav-link" href="{{ route('register.form') }}">Register</a>
-                            </div>
+                                <p>Don't have an account? <a href="{{ route('register.form') }}">Register here</a></p>                            </div>
                         </form>
                     </div>
                 </div>

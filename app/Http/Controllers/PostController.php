@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post; // Import the Post model
-
+use App\Models\User;
 class PostController extends Controller
 {
     public function index()
@@ -72,4 +72,43 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
     }
+    // public function userPosts()
+    // {
+    //     $user = auth()->user();
+    //     if ($user) {
+    //         $posts = $user->posts;
+    
+    //         if ($posts) {
+    //             return view('my-post', compact('posts'));
+    //         } else {
+    //             return view('my-post')->with('message', 'No posts found.');
+    //         }
+    //     } else {
+    //         return redirect()->route('login.form')->with('error', 'Please login to view your posts');
+    //     }
+    // } 
+
+    public function userPosts()
+    {
+        // استرجاع المستخدم الحالي
+        $user = auth()->user();
+    
+        if ($user) {
+            // استرجاع المنشورات المرتبطة بالمستخدم الحالي
+            $posts = $user->posts;
+    
+            if ($posts->isNotEmpty()) {
+                // عرض الصفحة وتمرير المنشورات
+                return view('my-post', compact('posts'));
+            } else {
+                // عرض رسالة إذا لم يتم العثور على منشورات مرتبطة بالمستخدم
+                return view('my-post')->with('message', 'No posts found for this user.');
+            }
+        } else {
+            // عرض رسالة إذا لم يتم العثور على مستخدم مسجل دخوله
+            return redirect()->route('login.form')->with('error', 'Please login to view your posts');
+        }
+    }
+
+
 }

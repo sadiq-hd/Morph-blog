@@ -13,22 +13,8 @@
             <div class="col-md-6">
                 <!-- هنا قائمة المنشورات -->
                 <h3>المنشورات</h3>
-                <div class="container">
-                    <h1 class="mt-5 mb-4">View All Posts</h1>
-                    <div class="row">
-                        <div class="col-md-8 offset-md-2">
-                            @foreach ($posts as $post)
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $post->title }}</h5>
-                                        <p class="card-text">{{ $post->content }}</p>
-                                        <span class="badge bg-primary rounded-pill">{{ $post->status }}</span>
-                                        <a href="{{ route('comments.store', ['post_id' => $post->id]) }}" class="btn btn-info btn-sm">Comment</a>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>            </div>
+                <!-- اضف العناصر الخاصة بالمنشورات هنا -->
+            </div>
         </div>
 
         

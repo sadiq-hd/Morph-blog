@@ -12,6 +12,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('posts.index') }}">المنشورات</a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('posts.userPosts') }}" class="btn btn-primary">My Posts</a>
+                </li>
+                
+              
                 @if(Auth::check())
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="post">

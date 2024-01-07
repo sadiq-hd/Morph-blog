@@ -19,6 +19,7 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    
 
     // تحديد الحقول القابلة للتعديل
     protected $fillable = [

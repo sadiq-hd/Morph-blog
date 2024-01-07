@@ -6,17 +6,25 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
+                @if(Auth::check() && Auth::user()->isAdmin())
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="{{ route('admin-dashboard') }}">Admin Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('edit.posts') }}" class="nav-link btn btn-primary">Edit Posts</a>
+                    </li>
+                @endif
+                @if(!(Auth::check() && Auth::user()->isAdmin()))
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" href="/">الصفحة الرئيسية</a>
+                    </li>
+                @endif
                 <li class="nav-item">
-                    <a class="nav-link" href="/">الصفحة الرئيسية</a>
+                    <a class="nav-link btn btn-primary" href="{{ route('posts.index') }}">المنشورات</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('posts.index') }}">المنشورات</a>
+                    <a href="{{ route('posts.userPosts') }}" class="nav-link btn btn-primary">My Posts</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('posts.userPosts') }}" class="btn btn-primary">My Posts</a>
-                </li>
-                
-              
                 @if(Auth::check())
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="post">
@@ -26,10 +34,10 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login.form') }}">Login</a>
+                        <a class="nav-link btn btn-primary" href="{{ route('login.form') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register.form') }}">Register</a>
+                        <a class="nav-link btn btn-primary" href="{{ route('register.form') }}">Register</a>
                     </li>
                 @endif
             </ul>

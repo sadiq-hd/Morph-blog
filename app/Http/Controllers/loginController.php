@@ -25,10 +25,11 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin-dashboard');
             } elseif ($user->role === 'user') {
                 return redirect()->route('home');
             }
+            
         }
 
         return back()->withErrors([
@@ -37,8 +38,15 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request)
-    {
+{
+    if (Auth::check()) {
         Auth::logout();
-        return redirect('/');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect()->route('login.form')->with('success', 'Logged out successfully!');
+    } else {
+        return redirect()->route('login.form')->with('error', 'You are not logged in.');
     }
+}
 }

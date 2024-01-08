@@ -27,6 +27,8 @@ Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edi
 Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 Route::get('/edit/posts', [AdminController::class, 'editPosts'])->name('edit.posts');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 // Define admin-dashboard route and view
 Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('admin-dashboard');
@@ -34,6 +36,7 @@ Route::get('/admin-dashboard', [AdminController::class, 'dashboard'])->name('adm
 
 // Rest of the routes...
 Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/posts', [AdminController::class, 'showPosts'])->name('admin.posts');
     Route::delete('/admin/posts/{id}', [AdminController::class, 'deletePost'])->name('admin.posts.delete');
 });

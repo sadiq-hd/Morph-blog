@@ -1,3 +1,5 @@
+<!-- resources/views/posts.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,40 +43,44 @@
         }
     </style>
     
-    
-</head>
-<body>
-    <div class="container">
-        <h1 class="mt-5 mb-4">View All Posts</h1>
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="bordered-posts">
-                    @foreach ($posts as $post)
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title post-title">{{ $post->title }}</h5>
-                            <hr class="post-title-divider">
-                            <p class="card-text post-content">{{ $post->content }}</p>
-                            <span class="badge bg-primary rounded-pill">{{ $post->status }}</span>
-                            <span class="badge bg-secondary rounded-pill">{{ $post->user->name }}</span>
+    <body>
+        <div class="container">
+            <h1 class="mt-5 mb-4">View All Posts</h1>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="bordered-posts">
+                        @foreach ($posts as $post)
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title post-title">{{ $post->title }}</h5>
+                                <hr class="post-title-divider">
+                                <p class="card-text post-content">{{ $post->content }}</p>
+                                <span class="badge bg-primary rounded-pill">{{ $post->status }}</span>
+                                <span class="badge bg-secondary rounded-pill">{{ $post->user->name }}</span>
+                                <!-- رابط لعرض التفاصيل الكاملة للمنشور -->
+                                <div class="mt-3">
+                                    <a href="{{ route('posts.show', ['id' => $post->id]) }}" class="btn btn-primary">
+                                        View Post <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+                        @endforeach
                     </div>
-                @endforeach
                 </div>
             </div>
+            <div class="mt-1 mb-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                    Add Post
+                </button>
+                @include('add-post')
+            </div>
         </div>
-        <div class="mt-1 mb-4">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                Add Post
-            </button>
-            @include('add-post')
-        </div>
-    </div>
-
-    <!-- Link to Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Font Awesome Script -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-</body>
-@include('footer')
-</html>
+    
+        <!-- Link to Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Font Awesome Script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    </body>
+    @include('footer')
+    </html>

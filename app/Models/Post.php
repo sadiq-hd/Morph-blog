@@ -10,6 +10,17 @@ class Post extends Model
     use HasFactory;
 
     // تحديد العلاقات
+    public function destroyComment($id)
+    {
+        $comment = Comment::findOrFail($id);
+
+        // يجب تحقق الصلاحيات هنا قبل حذف التعليق
+
+        $comment->delete();
+
+        return redirect()->back()->with('success', 'Comment deleted successfully');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,4 +41,5 @@ class Post extends Model
     protected $guarded = []; // للسماح بتعديل جميع الحقول
 
     // الأكواد الإضافية التي تحتاجها
+ 
 }
